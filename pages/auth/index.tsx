@@ -23,7 +23,7 @@ export default function Index(){
                         Welcome to SIPOMAS
                     </h6>
                     <p className = 'text-muted'>
-                        Silahkan login untuk melanjutkan ke halaman utama
+                        Please login to continue to the main page
                     </p>
 
                     <Stack 
