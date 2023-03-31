@@ -13,14 +13,16 @@ export default function ComponentsLogin(){
         <PasswordContext.Provider
             value = {{ 
                 showPassword, 
-                setShowPassword 
+                setShowPassword,
+                showVerifyPassword: false,
+                setShowVerifyPassword: () => {}
             }}
         >
             <AuthLayouts>
                 <header>
                     <HeaderAuth 
                         title = "Login page"
-                        description = "Silahkan login untuk melanjutkan"
+                        description = "Please Login to continue"
                     />
                 </header>
 
