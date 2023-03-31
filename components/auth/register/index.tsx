@@ -7,19 +7,22 @@ import { PasswordContext } from "@/components/form/FormContext";
 
 export default function RegisterComponent(){
     const [showPassword, setShowPassword] = useState<boolean>(false);
+    const [showVerifyPassword, setShowVerifyPassword] = useState<boolean>(false);
 
     return(
         <PasswordContext.Provider
             value = {{
                 showPassword,
-                setShowPassword
+                setShowPassword,
+                showVerifyPassword,
+                setShowVerifyPassword
             }}
         >
             <AuthLayouts>
                 <header>
                     <HeaderAuth 
                         title = "Register page"
-                        description = "Silahkan register untuk melanjutkan"
+                        description = "Please Register to continue"
                     />
                 </header>
 
