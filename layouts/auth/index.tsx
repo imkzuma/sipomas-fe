@@ -9,7 +9,7 @@ export function AuthLayouts({ children } : any){
         >
             <Container>
                 <Row className = 'justify-content-center'>
-                    <Col lg = {4}>
+                    <Col xl = {4} lg = {5} md = {7} sm = {8}>
                         { children }
                     </Col>
                 </Row>
