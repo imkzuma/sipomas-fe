@@ -18,7 +18,20 @@ export function FormTextInput({ controlId, label, children } : FormInputInterfac
 }
 
 export function FormTextPassword({ controlId, label, children } : FormInputInterface){
-    const {showPassword, setShowPassword} = useContext(PasswordContext);
+    const {
+        showPassword, 
+        setShowPassword, 
+        showVerifyPassword, 
+        setShowVerifyPassword
+    } = useContext(PasswordContext);
+
+    function handleClick(){
+        if(controlId === 'inputPassword'){
+            setShowPassword(!showPassword);
+        }else{
+            setShowVerifyPassword(!showVerifyPassword);
+        }   
+    }
 
     return(
         <InputGroup>
@@ -31,12 +44,14 @@ export function FormTextPassword({ controlId, label, children } : FormInputInter
             </FloatingLabel>
             <InputGroup.Text 
                 className = 'px-4 bg-transparent'
-                onClick={() => setShowPassword(!showPassword)}
+                onClick={handleClick}
                 style = {{cursor: "pointer"}}
             >
                 {
-                    showPassword? <BsEyeFill className = 'text-primary fs-5'/>
-                    : <BsEyeSlashFill className = 'text-primary fs-5' />
+                    controlId === 'inputPassword'? 
+                        showPassword? <BsEyeSlashFill className="text-primary fs-5" /> : <BsEyeFill className="text-primary fs-5" /> 
+                    :
+                        showVerifyPassword? <BsEyeSlashFill className="text-primary fs-5" /> : <BsEyeFill className="text-primary fs-5" />
                 }
             </InputGroup.Text>
         </InputGroup>
