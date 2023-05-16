@@ -1,10 +1,12 @@
 import { useState } from 'react';
-
-import { HeaderAuth } from '../Header';
-import { AuthLayouts } from '@/layouts/auth';
-import FormLogin from './FormLogin';
+import dynamic from 'next/dynamic';
 
 import { PasswordContext } from '@/components/form/FormContext';
+import Loading from '@/components/loading';
+
+const FormLogin = dynamic(() => import('./FormLogin'), { loading: () => <Loading /> });
+const HeaderAuth = dynamic(() => import('../Header').then(mod => mod.HeaderAuth), { loading: () => <Loading /> });
+const AuthLayouts = dynamic(() => import('@/layouts/auth').then(mod => mod.AuthLayouts), { loading: () => <Loading /> });
 
 export default function ComponentsLogin(){
     const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -27,8 +29,8 @@ export default function ComponentsLogin(){
                 </header>
 
                 <FormLogin />
-
             </AuthLayouts>
+            
         </PasswordContext.Provider>
     )
 }

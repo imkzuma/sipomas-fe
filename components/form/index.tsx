@@ -17,7 +17,7 @@ export function FormTextInput({ controlId, label, children } : FormInputInterfac
 
 }
 
-export function FormTextPassword({ controlId, label, children } : FormInputInterface){
+export function FormTextPassword({ controlId, label, className, children } : FormInputInterface){
     const {
         showPassword, 
         setShowPassword, 
@@ -34,7 +34,7 @@ export function FormTextPassword({ controlId, label, children } : FormInputInter
     }
 
     return(
-        <InputGroup>
+        <InputGroup className = {className}>
             <FloatingLabel
                 controlId = { controlId }
                 label = { label }

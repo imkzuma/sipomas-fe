@@ -1,0 +1,44 @@
+.hero{
+    background: url('/assets/img/hero/hero-bg-md.webp') no-repeat ;
+    background-size: 190%; 
+    background-position: 60% 0;
+}
+
+.drone{
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    top: 200px;
+    right: 300px;
+    animation: drone 5s infinite;
+}
+
+.line__hero{
+    left: calc(50% - 12px);
+    z-index: -99;
+}
+.parent__vr{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+.vr{
+    position: absolute;
+    background: linear-gradient(#d2a8ff, #a371f7 10%, #196c2e 70%, #0d1117 90%);  
+    width: 3px;  
+    height: 65vh;
+    top: -1px;
+    left: 30px;
+}
+
+@keyframes drone{
+    0%{
+        transform: translateY(0);
+    }
+    50%{
+        transform: translateY(30px);
+    }
+    100%{
+        transform: translateY(0);
+    }
+}

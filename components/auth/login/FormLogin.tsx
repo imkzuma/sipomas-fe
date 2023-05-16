@@ -1,19 +1,61 @@
-import Link from "next/link";
-import { useContext, useState } from 'react';
-import { Button, Form, Stack } from "react-bootstrap";
+import Link from 'next/link';
+import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
 
-import { FormTextInput, FormTextPassword } from "@/components/form/index";
+import { useContext, useState, FormEvent, ChangeEvent } from 'react';
+import { Button, Form, Stack } from "react-bootstrap";
+import { AnimatePresence, motion } from "framer-motion";
+
 import { PasswordContext } from "@/components/form/FormContext";
+import { isEmailValid, isPasswordValid } from "@/components/form/InputHandler";
+
+const FormTextInput = dynamic(() => import('@/components/form').then(mod => mod.FormTextInput));
+const FormTextPassword = dynamic(() => import('@/components/form').then(mod => mod.FormTextPassword));
 
 export default function FormLogin(){
     const { showPassword } = useContext(PasswordContext);
 
     const [email, setEmail] = useState<string>("");
-    const [password, setPassword] = useState<string>("");
+    const [emailStatus , setEmailStatus] = useState<boolean>(true);
 
-    const handleSubmit = async(event: React.FormEvent<HTMLFormElement>) => {
+    const [password, setPassword] = useState<string>("");
+    const [passwordStatus, setPasswordStatus] = useState<boolean>(true);
+
+    const handleSubmit = async(event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         console.log(email,password);
+    }
+
+    const handleEmailInput = (event: ChangeEvent<HTMLInputElement>) => {
+        if (event.target.value === ""){
+            setEmailStatus(true);
+        }
+
+        else{
+            if (!isEmailValid(event.target.value)){
+                setEmailStatus(false);
+            }
+            else{
+                setEmailStatus(true);
+                setEmail(event.target.value);
+            }
+        }
+    }
+
+    const handlePasswordInput = (event: ChangeEvent<HTMLInputElement>) => {
+        if (event.target.value === ""){
+            setPasswordStatus(true);
+        }
+
+        else{
+            if (!isPasswordValid(event.target.value)){
+                setPasswordStatus(false);
+            }
+            else{
+                setPasswordStatus(true);
+                setPassword(event.target.value);
+            }
+        }
     }
 
     return(
@@ -33,9 +75,24 @@ export default function FormLogin(){
                         <Form.Control 
                             type = "email" 
                             placeholder = "youremail@email.com" 
-                            onChange = {(e) => setEmail(e.target.value)}
+                            onChange = { handleEmailInput }
                             required 
+                            className = {`${!emailStatus? "border-danger" : ""}`}
                         />
+                        <AnimatePresence>
+                            {
+                                !emailStatus&&
+                                <motion.div
+                                    initial = {{opacity: 0}}
+                                    animate = {{opacity: 1}}
+                                    exit = {{opacity: 0}}
+                                >
+                                    <Form.Text className = "text-danger">
+                                        Please input a valid email address
+                                    </Form.Text>
+                                </motion.div>
+                            }
+                        </AnimatePresence>
                     </FormTextInput>
 
                     <FormTextPassword
@@ -45,10 +102,26 @@ export default function FormLogin(){
                         <Form.Control 
                             type = { showPassword? "text" : "password" } 
                             placeholder = "Input your password" 
-                            onChange = {(e) => setPassword(e.target.value)}
+                            onChange = { handlePasswordInput }
                             required 
                         />
                     </FormTextPassword>
+                    <AnimatePresence>
+                        {
+                            !passwordStatus&&
+                            <motion.div
+                                initial = {{opacity: 0}}
+                                animate = {{opacity: 1}}
+                                exit = {{opacity: 0}}
+                                style = {{marginTop: "-0.8rem", paddingBottom: "0.8rem"}}
+                            >
+                                <Form.Text className = "text-danger" > 
+                                    Password must be at least 8 characters
+                                </Form.Text>
+                            </motion.div>
+                        }
+                    </AnimatePresence>
+
                     <div>
                         <Link href = "#" className = 'text-primary text-decoration-none'>
                             Forgot Password ?

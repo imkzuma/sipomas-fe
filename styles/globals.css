@@ -1,3 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+*{
+    font-family: 'Lato', sans-serif;
+}
+
+
+
 input:focus{
     box-shadow: none !important;
+}
+
+.fw-900{
+    font-weight: 900 !important;
+}
+.fw-700{
+    font-weight: 700 !important;
+}
+.fw-500{
+    font-weight: 500 !important;
+}
+
+.col-why-sipomas{
+    border-right: 2px dashed var(--bs-secondary);
+    border-radius: 10rem;
+}
+
+.col-why-sipomas:nth-child(odd){
+    border-right: 2px dashed var(--bs-primary);
+}
+
+.shadow-img{
+    box-shadow: 0 0 0 1px rgba(0,0,0,.5), 0 70px 65px rgba(0,0,0,.18), 0 30px 30px rgba(0,0,0,.14), 0 15px 15px rgba(0,0,0,.12), 0 10px 8px rgba(0,0,0,.1), 0 4px 4px rgba(0,0,0,.08), 0 2px 2px rgba(0,0,0,.06) !important;
+}
+
+.bg-section-why, .bg-section-faq {
+    position: relative;
+}
+
+.bg-section-why:before {
+    content: ' ';
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    opacity: 0.8;
+    background-image: url('/assets/img/section/bg-stars-1.webp');
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: 70%;
+}
+
+.bg-section-faq:before {
+    content: ' ';
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    opacity: 1;
+    background-image: url('/assets/img/section/footer-galaxy2.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
 }

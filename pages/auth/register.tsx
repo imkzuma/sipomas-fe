@@ -1,5 +1,9 @@
 import Head from "next/head";
-import RegisterComponent from "@/components/auth/register";
+import dynamic from "next/dynamic";
+
+import Loading from "@/components/loading";
+
+const RegisterComponent = dynamic(() => import('@/components/auth/register'), { loading: () => <Loading /> });
 
 export default function Register(){
     return(
@@ -8,9 +12,9 @@ export default function Register(){
                 <title>SIPOMAS | Register</title>
             </Head>
             
-            <section>
+            <main>
                 <RegisterComponent />
-            </section>
+            </main>
         </>
     )
 }

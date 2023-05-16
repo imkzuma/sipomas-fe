@@ -1,7 +1,12 @@
+import dynamic from "next/dynamic";
 import Head from "next/head";
 import Link from "next/link";
 
-import { Button, Container, Stack } from "react-bootstrap";
+import { Container, Stack } from "react-bootstrap";
+import Loading from "@/components/loading";
+
+const ButtonOutline = dynamic(() => import("@/components/button").then(mod => mod.ButtonOutline), { loading: () => <Loading />});
+const ButtonPrimary = dynamic(() => import("@/components/button").then(mod => mod.ButtonPrimary), { loading: () => <Loading />});
 
 export default function Index(){
     return(
@@ -32,14 +37,14 @@ export default function Index(){
                         className = 'justify-content-center'
                     >
                         <Link href = "/auth/login">
-                            <Button variant = "primary" className = "px-4">
+                            <ButtonPrimary>
                                 Login
-                            </Button>
+                            </ButtonPrimary>
                         </Link>
                         <Link href = "/auth/register">
-                            <Button variant = "outline-primary" className = "px-4">
+                            <ButtonOutline variant = "primary">
                                 Register
-                            </Button>
+                            </ButtonOutline>
                         </Link>
                     </Stack>
                 </div>
